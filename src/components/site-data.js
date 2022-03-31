@@ -18,7 +18,6 @@ const nav_menu = [
 
 export const fetchRepo = async () => {
   const url = "https://recent-repo.p.rapidapi.com/repos";
-  console.log(process.env.REACT_APP_APIHost);
   const repos = await axios.get(url, {
     headers: {
       "X-RapidAPI-Host": process.env.REACT_APP_APIHost,
@@ -36,25 +35,25 @@ export const social_icons = [
   {
     id: 1,
     type: "Facebook",
-    library: <FaFacebookF />,
+    library: <FaFacebookF className="icon" />,
     url: "https://facebook.com/abhishree143",
   },
   {
     id: 2,
     type: "Twitter",
-    library: <FaTwitter />,
+    library: <FaTwitter className="icon" />,
     url: "https://twitter.com/abhisri1997",
   },
   {
     id: 3,
     type: "GitHub",
-    library: <FaGithub />,
+    library: <FaGithub className="icon" />,
     url: "https://github.com/dev-elixir",
   },
   {
     id: 4,
     type: "LinkedIN",
-    library: <FaLinkedinIn />,
+    library: <FaLinkedinIn className="icon" />,
     url: "https://www.linkedin.com/in/abhisri1997/",
   },
 ];
