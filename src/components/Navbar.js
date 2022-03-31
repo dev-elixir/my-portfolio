@@ -1,31 +1,28 @@
-import { React } from "react";
+import { React, useEffect, useState } from "react";
 import nav_menu, { social_icons } from "./site-data";
+import { AiOutlineMenu } from "react-icons/ai";
 import "./navbar.css";
 
 const Navbar = () => {
-  //   const [isSelected, setIsSelected] = useState([]);
-  //   const handleSelect = (id) => {
-  //     setIsSelected((prev) => {
-  //       const newState = { ...prev };
-  //       const keys = Object.keys(newState);
-  //       // print all keys
-  //       if (keys.length > 0) {
-  //         keys.forEach((key, index) => {
-  //           if (key === String(id)) {
-  //             newState[id] = !newState[id];
-  //           }
-  //         });
-  //       }
+  const [stickyClass, setStickyClass] = useState("");
 
-  //       return newState;
-  //     });
-  //   };
+  useEffect(() => {
+    window.addEventListener("scroll", stickyNavbar);
 
-  //   useEffect(() => {
-  //     console.log(isSelected);
-  //   }, [isSelected]);
+    return () => {
+      window.removeEventListener("scroll", stickyNavbar);
+    };
+  }, []);
+
+  const stickyNavbar = () => {
+    if (window !== undefined) {
+      let windowHeight = window.scrollY;
+      windowHeight > 150 ? setStickyClass("sticky") : setStickyClass("");
+    }
+  };
+
   return (
-    <div className="no-container">
+    <div className={`no-container ${stickyClass}`}>
       <nav className="main-nav my-container">
         <div className="nav-logo">
           <a href={window.location.origin}>AK</a>
@@ -49,7 +46,7 @@ const Navbar = () => {
           {social_icons.map((platform) => {
             const { id, type, library, url } = platform;
             return (
-              <li key={id} className={`icon ${type}`}>
+              <li key={id} className={`${type}`}>
                 <a href={url} rel="noreferrer noopener" target="_blank">
                   {library}
                 </a>
@@ -57,6 +54,7 @@ const Navbar = () => {
             );
           })}
         </ul>
+        <AiOutlineMenu className="icons" />
       </nav>
     </div>
   );

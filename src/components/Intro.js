@@ -41,7 +41,7 @@ const Intro = () => {
             Current Employer even though working as a Database Admin.
           </p>
           <p className="project-showcase" id="projects">
-            Currently Working on:{" "}
+            Recent Projects{" "}
           </p>
           <ul className="my-projects">
             {gitHub.length > 0 &&
