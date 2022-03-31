@@ -10,33 +10,23 @@ import { SiCodecademy, SiRobotframework } from "react-icons/si";
 import axios from "axios";
 
 const nav_menu = [
-  { id: 1, text: "Home", url: "javascript:window.location.reload(true)" },
+  { id: 1, text: "Home", url: window.location.origin },
   { id: 2, text: "Projects", url: "#projects" },
   { id: 3, text: "Achievements/Skills", url: "#skills" },
   { id: 4, text: "About", url: "#about" },
 ];
 
 export const fetchRepo = async () => {
-  const options = {
-    method: "GET",
-    url: "https://recent-repo.p.rapidapi.com/repos",
-    params: { user: "dev-elixir", repo: 6 },
+  const url = "https://recent-repo.p.rapidapi.com/repos";
+  const repos = await axios.get(url, {
     headers: {
       "X-RapidAPI-Host": "recent-repo.p.rapidapi.com",
       "X-RapidAPI-Key": "e592b42cfcmsh921b2df5f59a710p1cc963jsn1318a35d70e4",
     },
-  };
-  const repos = await axios.request(options);
-
-  repos.data.forEach((repo) => {
-    const { id, repoName, repoLink, repoDesc } = repo;
-    // console.log(id, repoName, repoLink, repoDesc);
-    recent_repo.push({
-      id: id,
-      repoName: repoName,
-      repoLink: repoLink,
-      repoDesc: repoDesc,
-    });
+    params: {
+      user: "dev-elixir",
+      repo: 6,
+    },
   });
   return repos;
 };
@@ -109,7 +99,5 @@ export const skills = [
     text: "PostgreSql, MySQL",
   },
 ];
-
-export const recent_repo = [];
 
 export default nav_menu;

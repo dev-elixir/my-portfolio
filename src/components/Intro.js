@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { recent_repo, fetchRepo } from "./site-data";
+import { fetchRepo } from "./site-data";
 import { FaDirections } from "react-icons/fa";
 import "./intro.css";
 import profile_img from "../assets/profile.jpg";
 
 const Intro = () => {
   const [gitHub, setGitHub] = useState([]);
+
+  const getGitHub = async () => {
+    const data = await fetchRepo();
+    setGitHub(data.data);
+  };
+
   useEffect(() => {
-    const fetch = async () => {
-      await fetchRepo();
-      if (recent_repo.length > 0) {
-        // console.log(recent_repo);
-        setGitHub(recent_repo); // Updates the DOM
-        // console.log(recent_repo);
-        // console.log(data);
-        console.log(gitHub);
-      }
-    };
-    fetch();
-    // eslint-disable-next-line
+    getGitHub();
   }, []);
+
   return (
     <header className="no-container">
       <main className="main-header my-container">
@@ -48,28 +44,29 @@ const Intro = () => {
             Currently Working on:{" "}
           </p>
           <ul className="my-projects">
-            {recent_repo.map((repo) => {
-              // console.log(repo);
-              const { id, repoName, repoLink, repoDesc } = repo;
-              return (
-                <li className="project" key={id}>
-                  <h4 className="project-name">
-                    <a
-                      className="project-link"
-                      href={repoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="icons">
-                        <FaDirections />
-                      </span>
-                      {repoName}
-                    </a>
-                  </h4>
-                  <p className="project-desc">{repoDesc}</p>
-                </li>
-              );
-            })}
+            {gitHub.length > 0 &&
+              gitHub.map((repo) => {
+                // console.log(repo);
+                const { id, repoName, repoLink, repoDesc } = repo;
+                return (
+                  <li className="project" key={id}>
+                    <h4 className="project-name">
+                      <a
+                        className="project-link"
+                        href={repoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span className="icons">
+                          <FaDirections />
+                        </span>
+                        {repoName}
+                      </a>
+                    </h4>
+                    <p className="project-desc">{repoDesc}</p>
+                  </li>
+                );
+              })}
           </ul>
         </div>
       </main>

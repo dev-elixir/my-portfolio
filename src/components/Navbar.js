@@ -28,7 +28,7 @@ const Navbar = () => {
     <div className="no-container">
       <nav className="main-nav my-container">
         <div className="nav-logo">
-          <a href="javascript:window.location.reload(true)">AK</a>
+          <a href={window.location.origin}>AK</a>
         </div>
         <ul className="nav-menu">
           {nav_menu.map((item) => {
