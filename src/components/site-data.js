@@ -18,10 +18,11 @@ const nav_menu = [
 
 export const fetchRepo = async () => {
   const url = "https://recent-repo.p.rapidapi.com/repos";
+  console.log(process.env.REACT_APP_APIHost);
   const repos = await axios.get(url, {
     headers: {
-      "X-RapidAPI-Host": "recent-repo.p.rapidapi.com",
-      "X-RapidAPI-Key": "e592b42cfcmsh921b2df5f59a710p1cc963jsn1318a35d70e4",
+      "X-RapidAPI-Host": process.env.REACT_APP_APIHost,
+      "X-RapidAPI-Key": process.env.REACT_APP_APIKey,
     },
     params: {
       user: "dev-elixir",
