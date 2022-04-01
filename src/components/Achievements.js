@@ -6,7 +6,7 @@ const Achievements = () => {
   return (
     <section className="no-container my-achievement">
       <div className="my-container achievement-section">
-        <div className="achievement-title">
+        <div className="achievement-title" id="achievements">
           <h4 className="achievement-heading">Achievements</h4>
           <ul className="achievement-list">
             {achievements.map((achievement) => {
@@ -19,7 +19,7 @@ const Achievements = () => {
             })}
           </ul>
         </div>
-        <div className="skills-title" id="skills">
+        <div className="skills-title">
           <h4 className="skills-heading">Skills</h4>
           <div className="my-skills">
             {skills.map((category) => {
