@@ -8,7 +8,7 @@ const Navbar = () => {
   const [isToggled, setIsToggled] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", stickyNavbar.bind(null, 1));
+    window.addEventListener("scroll", stickyNavbar.bind(null, 1)); // using bind as direct paramter was not accessible
     // window.addEventListener("resize", stickyNavbar(2));
 
     return () => {
