@@ -12,7 +12,7 @@ import axios from "axios";
 const nav_menu = [
   { id: 1, text: "Home", url: window.location.origin },
   { id: 2, text: "Projects", url: "#projects" },
-  { id: 3, text: "Achievements/Skills", url: "#skills" },
+  { id: 3, text: "Achievements/Skills", url: "#achievements" },
   { id: 4, text: "About", url: "#about" },
 ];
 

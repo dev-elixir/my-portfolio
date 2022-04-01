@@ -5,56 +5,69 @@ import "./navbar.css";
 
 const Navbar = () => {
   const [stickyClass, setStickyClass] = useState("");
+  const [isToggled, setIsToggled] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", stickyNavbar);
+    window.addEventListener("scroll", stickyNavbar.bind(null, 1));
+    // window.addEventListener("resize", stickyNavbar(2));
 
     return () => {
-      window.removeEventListener("scroll", stickyNavbar);
+      window.removeEventListener("scroll", stickyNavbar.bind(null, 1));
+      // window.removeEventListener("resize", stickyNavbar(2));
     };
   }, []);
 
-  const stickyNavbar = () => {
-    if (window !== undefined) {
+  const stickyNavbar = (id) => {
+    if (window !== undefined && id === 1) {
       let windowHeight = window.scrollY;
       windowHeight > 150 ? setStickyClass("sticky") : setStickyClass("");
+    } else {
+      if (window.innerWidth >= 900) {
+        setIsToggled(false);
+      }
     }
   };
 
   return (
     <div className={`no-container ${stickyClass}`}>
-      <nav className="main-nav my-container">
-        <div className="nav-logo">
-          <a href={window.location.origin}>AK</a>
+      <nav className="my-container navbar">
+        <div className="navbar-logo">
+          <div className="logo">
+            <a href={window.location.origin} className="logo-link">
+              AK
+            </a>
+          </div>
+          <AiOutlineMenu
+            className="toggle-bar icons"
+            onClick={() => setIsToggled(!isToggled)}
+          />
         </div>
-        <ul className="nav-menu">
-          {nav_menu.map((item) => {
-            const { id, text, url } = item;
-            return (
-              <li key={id} className="nav-link">
-                {/* <a
-                  href={url}
-                  className={isSelected[id - 1] ? "active" : ""}
-                  onClick={() => handleSelect(id - 1)}
-                > */}
-                <a href={url}>{text}</a>
-              </li>
-            );
-          })}
-        </ul>
-        <ul className="social-icons">
-          {social_icons.map((platform) => {
-            const { id, type, library, url } = platform;
-            return (
-              <li key={id} className={`${type}`}>
-                <a href={url} rel="noreferrer noopener" target="_blank">
-                  {library}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-        <AiOutlineMenu className="icons" />
+        <div className="navbar-links">
+          <ul className={isToggled ? "nav-menu dropdown" : "nav-menu"}>
+            {nav_menu.map((item) => {
+              const { id, text, url } = item;
+              return (
+                <li key={id} className="nav-link">
+                  <a href={url} onClick={() => setIsToggled(false)}>
+                    {text}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          <ul className="social-icons">
+            {social_icons.map((platform) => {
+              const { id, type, library, url } = platform;
+              return (
+                <li key={id} className={`${type}`}>
+                  <a href={url} rel="noreferrer noopener" target="_blank">
+                    {library}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </nav>
     </div>
   );
