@@ -49,3 +49,10 @@ h6 {
   font-size: clamp(1.5rem, calc(5% - 1rem), 2rem);
   /* color: darkslategray; */
 }
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+}

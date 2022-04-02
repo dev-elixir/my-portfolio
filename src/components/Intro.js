@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { fetchRepo } from "./site-data";
+import React from "react";
+
 import { FaDirections } from "react-icons/fa";
 import "./intro.css";
-import profile_img from "../assets/profile.jpg";
+import profile_img from "../assets/profile-2.webp";
 
-const Intro = () => {
-  const [gitHub, setGitHub] = useState([]);
-
-  const getGitHub = async () => {
-    const data = await fetchRepo();
-    setGitHub(data.data);
-  };
-
-  useEffect(() => {
-    getGitHub();
-  }, []);
-
+const Intro = ({ gitHubRepo }) => {
   return (
     <header className="no-container">
       <main className="main-header my-container">
@@ -38,15 +27,14 @@ const Intro = () => {
             I have a keen interest in Competitive Programming, Full Stack
             Development and Automation. That being said am also self motivated,
             have made several Automation Scripts, API and NodeJS Projects for my
-            Current Employer even though working as a Database Admin.
+            Current Employer even though working as a gitHubRepobase Admin.
           </p>
           <p className="project-showcase" id="projects">
             Recent Projects{" "}
           </p>
           <ul className="my-projects">
-            {gitHub.length > 0 &&
-              gitHub.map((repo) => {
-                // console.log(repo);
+            {gitHubRepo.length > 0 &&
+              gitHubRepo?.map((repo) => {
                 const { id, repoName, repoLink, repoDesc } = repo;
                 return (
                   <li className="project" key={id}>

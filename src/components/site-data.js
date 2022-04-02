@@ -8,6 +8,7 @@ import {
 import { VscTerminalPowershell } from "react-icons/vsc";
 import { SiCodecademy, SiRobotframework } from "react-icons/si";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const nav_menu = [
   { id: 1, text: "Home", url: window.location.origin },
@@ -16,19 +17,34 @@ const nav_menu = [
   { id: 4, text: "About", url: "#about" },
 ];
 
-export const fetchRepo = async () => {
-  const url = "https://recent-repo.p.rapidapi.com/repos";
-  const repos = await axios.get(url, {
-    headers: {
-      "X-RapidAPI-Host": process.env.REACT_APP_APIHost,
-      "X-RapidAPI-Key": process.env.REACT_APP_APIKey,
-    },
-    params: {
-      user: "dev-elixir",
-      repo: 6,
-    },
-  });
-  return repos;
+export const useGetAPI = (url) => {
+  const [response, setResponse] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const getRepo = async () => {
+    const repos = await axios.get(url, {
+      headers: {
+        "X-RapidAPI-Host": process.env.REACT_APP_APIHost,
+        "X-RapidAPI-Key": process.env.REACT_APP_APIKey,
+      },
+      params: {
+        user: "dev-elixir",
+        repo: 6,
+      },
+    });
+    setResponse(repos.data);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      getRepo();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [url]);
+
+  return { isLoading, response };
 };
 
 export const social_icons = [

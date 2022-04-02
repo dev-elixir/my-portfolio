@@ -8,7 +8,6 @@ const Footer = () => {
   useEffect(() => {
     const currentYear = new Date().getFullYear();
     setYear(currentYear);
-    console.log(year);
     // eslint-disable-next-line
   }, []);
   return (
