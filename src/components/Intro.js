@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchRepo } from "./site-data";
 import { FaDirections } from "react-icons/fa";
 import "./intro.css";
-import profile_img from "../assets/profile.jpg";
+import profile_img from "../assets/profile.webp";
 
 const Intro = () => {
   const [gitHub, setGitHub] = useState([]);
@@ -30,15 +30,15 @@ const Intro = () => {
         <div className="about-me" id="about">
           <h1>About Me</h1>
           <p>
-            Hi, I am Abhinav Kumar, Currently working as a Associate System
+            Hi, I am Abhinav Kumar, Currently working as a Assistant System
             Engineer at Tata Consultancy Services Pvt LTD. I have a Bachelor
             degree in ECE(Electronics and Communication Engineering) from AKTU.
           </p>
           <p>
-            I have a keen interest in Competitive Programming, Full Stack
+            I have a an interest in Competitive Programming, Full Stack
             Development and Automation. That being said am also self motivated,
             have made several Automation Scripts, API and NodeJS Projects for my
-            Current Employer even though working as a Database Admin.
+            Current Employer.
           </p>
           <p className="project-showcase" id="projects">
             Recent Projects{" "}
